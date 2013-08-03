@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_FilterAdmin
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<config>
+	<menu>
+		<ewall>
+            <title>Ewall Team</title>
+            <sort_order>79</sort_order>
+			<children>
+                <filters translate="title" module="ewall_filteradmin">
+                    <title>Layered Navigation</title>
+                    <action>adminhtml/ewall_filters/</action>
+                    <sort_order>100</sort_order>
+                </filters>
+			</children>
+		</ewall>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<ewall translate="title" module="ewall_filteradmin">
+                        <title>Configure Ewall Extensions</title>
+                        <sort_order>79</sort_order>
+						<children>
+							<filters translate="title" module="ewall_filteradmin">
+								<title>Layered Navigation</title>
+		                        <sort_order>100</sort_order>
+							</filters>
+						</children>
+					</ewall>
+					<system>
+						<children>
+							<config>
+								<children>
+									<ewall_filters translate="title" module="ewall_filteradmin">
+										<title>Ewall Team Layered Navigation</title>
+									</ewall_filters>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ewall_Contacts>
+            <version>0.1.0</version>
+        </Ewall_Contacts>
+    </modules>
+    <global>
+        <rewrite>
+            <ewall_contacts_index>
+                <from><![CDATA[#^/contacts/index/#]]></from>
+                <to>/contacts/index/</to>
+            </ewall_contacts_index>
+            <ewall_contacts_index>
+                <from><![CDATA[#^/contacts/post#]]></from>
+                <to>/contacts/post/</to>
+            </ewall_contacts_index>            
+        </rewrite>
+    </global>
+    <frontend>
+        <routers>
+            <ewall_contacts>
+                <use>standard</use>
+                <args>
+                    <module>Ewall_Contacts</module>
+                    <frontName>contacts</frontName>
+                </args>
+            </ewall_contacts>
+        </routers>
+    </frontend>    
+</config>

@@ -1,0 +1,22 @@
+<?php 
+/**
+ * @category    Ewall
+ * @package     Ewall_Tree
+ * @copyright   Copyright (c) http://www.ewalldev.com
+ * @license     http://www.ewalldev.com/license  Proprietary License
+ */
+/** 
+ * Template for showing options for filter as a list of radio buttons 
+ * @author Ewall Team
+ * Injected instead of standard catalog/layer/filter.phtml in Ewall_Filters_Block_Filter_Attribute init() method.
+ * This template is overridden by copying (template body was pasted from catalog/layer/filter.phtml 
+ * and modified as needed). All changes are marked with comments.
+ */
+/* @var $this Ewall_Tree_Block_Filter */
+/* @var $filters Ewall_Filters_Helper_Data */ $filters = Mage::helper(strtolower('Ewall_Filters'));
+?>
+<ol class="m-filter-item-list m-tree" id="m-tree-<?php echo $filters->getFilterName($this, $this->getFilter()) ?>">
+    <?php foreach ($this->getChild() as /* @var $childBlock Ewall_Tree_Block_Item */$childBlock) : ?>
+    <?php echo $childBlock->toHtml() ?>
+    <?php endforeach ?>
+</ol>

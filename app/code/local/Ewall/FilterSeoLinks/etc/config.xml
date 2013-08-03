@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_FilterSeoLinks
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<!-- BASED ON SNIPPET: New Module/etc/config.xml -->
+<config>
+	<!-- This section registers module with Magento system. -->
+	<modules>
+		<Ewall_FilterSeoLinks>
+		  	<!-- This version number identifies version of database tables specific to this extension. It is written to
+		  	core_resource table.  -->
+		    <version>13.05.17.13</version>
+		</Ewall_FilterSeoLinks>
+	</modules>
+	<!-- This section contains module settings which are merged into global configuration during each page load, 
+	each ajax request. -->
+	<global>
+		<!-- This section registers helper classes to be accessible through Mage::helper() method. Ewall_FilterSeoLinks_Helper_Data
+		class is accessible through Mage::helper('ewall_filterseolinks') call, other Ewall_FilterSeoLinks_Helper_XXX_YYY classes are accessible 
+		through  Mage::helper('ewall_filterseolinks/xxx_yyy') call. -->
+		<helpers>
+			<ewall_filterseolinks>
+				<!-- This says that string 'ewall_filterseolinks' corresponds to Ewall_FilterSeoLinks_Helper pseudo-namespace in 
+				Mage::helper() calls. -->
+				<class>Ewall_FilterSeoLinks_Helper</class>
+			</ewall_filterseolinks>
+		</helpers>
+		<!-- BASED ON SNIPPET: Models/Model support (config.xml) -->
+		<!-- This section registers model classes to be accessible through Mage::getModel('<model type>') and through
+		Mage::getSingleton('<model type>') calls. That is, Ewall_FilterSeoLinks_Model_XXX_YYY classes are accessible as 
+		'ewall_filterseolinks/xxx_yyy' type strings both in getModel() and getSingleton() calls. -->
+		<models>
+			<!-- This says that string 'ewall_filterseolinks' corresponds to Ewall_FilterSeoLinks_Model pseudo-namespace in 
+			getModel() and getSingleton() calls. -->
+			<ewall_filterseolinks>
+				<class>Ewall_FilterSeoLinks_Model</class>
+				<!-- BASED ON SNIPPET: Resources/Declare resource section (config.xml) -->
+				<!-- This tells Magento to read config/global/models/ewall_filterseolinks_resources sections and register
+				resource model information from there -->
+				<resourceModel>ewall_filterseolinks_resources</resourceModel>
+			</ewall_filterseolinks>
+			<!-- BASED ON SNIPPET: Models/Rewrite support (config.xml) -->
+			<!-- This declares that current module will rewrite some model types in module shortnamed 'core'. -->
+			<core>
+				<rewrite>
+					<url>Ewall_FilterSeoLinks_Model_Url</url>
+					<url_rewrite>Ewall_FilterSeoLinks_Model_Rewrite</url_rewrite>
+					<store>Ewall_FilterSeoLinks_Model_Store</store>
+					<!-- INSERT HERE: individual type rewrites -->
+				</rewrite>
+			</core>
+			<!-- BASED ON SNIPPET: Resources/Resource support (config.xml) -->
+			<!-- This says that string 'ewall_filterseolinks' corresponds to Ewall_FilterSeoLinks_Resource pseudo-namespace in 
+			getResourceModel() calls. -->
+			<ewall_filterseolinks_resources>
+				<class>Ewall_FilterSeoLinks_Resource</class>
+				<entities>
+					<!-- INSERT HERE: table-entity mappings -->
+				</entities>
+			</ewall_filterseolinks_resources>
+			<!-- INSERT HERE: rewrites, ... -->
+		</models>
+        <!-- This section registers event handlers of this module defined in Ewall_FilterSeoLinks_Model_Observer with 
+              events defined in other module throughout the system. So when some code in other module invokes an event 
+              mentioned in this section, handler method of Ewall_FilterSeoLinks_Model_Observer class gets called. -->
+        <events>
+            <controller_action_layout_generate_blocks_after><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filterseolinks>
+                        <class>ewall_filterseolinks/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>addAppliedFiltersToTitle</method>
+                        <!-- event handler method name -->
+                    </ewall_filterseolinks>
+                </observers>
+            </controller_action_layout_generate_blocks_after>        
+
+            <controller_action_layout_render_before_catalog_category_view><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filterseolinks_noindex>
+                        <class>ewall_filterseolinks/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>noindexCategoryView</method>
+                        <!-- event handler method name -->
+                    </ewall_filterseolinks_noindex>
+                </observers>
+            </controller_action_layout_render_before_catalog_category_view>
+            <controller_action_layout_render_before_catalogsearch_result_index><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filterseolinks_noindex>
+                        <class>ewall_filterseolinks/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>noindexSearchResult</method>
+                        <!-- event handler method name -->
+                    </ewall_filterseolinks_noindex>
+                </observers>
+            </controller_action_layout_render_before_catalogsearch_result_index>
+            <controller_action_layout_render_before_cms_page_view><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filterseolinks_noindex>
+                        <class>ewall_filterseolinks/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>noindexCmsPage</method>
+                        <!-- event handler method name -->
+                    </ewall_filterseolinks_noindex>
+                </observers>
+            </controller_action_layout_render_before_cms_page_view>
+            <controller_action_layout_render_before_cms_index_index><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filterseolinks_noindex>
+                        <class>ewall_filterseolinks/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>noindexCmsIndex</method>
+                        <!-- event handler method name -->
+                    </ewall_filterseolinks_noindex>
+                </observers>
+            </controller_action_layout_render_before_cms_index_index>
+            <m_before_load_filter_collection><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filterseolinks>
+                        <class>ewall_filterseolinks/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>addLowerCaseNameColumnToFilterCollection</method>
+                        <!-- event handler method name -->
+                    </ewall_filterseolinks>
+                </observers>
+            </m_before_load_filter_collection>
+        </events><!-- INSERT HERE: blocks, models, ... -->
+	</global>
+	<!-- BASED ON SNIPPET: Static Visuals/Adminhtml section (config.xml) -->
+	<!-- This section enables static visual changes in admin area. -->
+	<adminhtml>
+		<!-- BASED ON SNIPPET: Translation support/Adminhtml (config.xml) -->
+		<!-- This section registers additional translation file with our module-specific strings to be loaded 
+		during admin area request processing -->
+		<translate>
+			<modules>
+				<Ewall_FilterSeoLinks>
+					<files>
+						<default>Ewall_FilterSeoLinks.csv</default>
+					</files>
+				</Ewall_FilterSeoLinks>
+			</modules>
+		</translate>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</adminhtml>
+	
+	<!-- INSERT HERE: adminhtml, frontend, ... -->
+
+	<!-- This section provides defaults for values normally configurable through global system configuration 
+	UI in admin area. -->
+	<default>
+		<ewall_filters>
+			<seo>
+				<conditional_word>where</conditional_word>
+				<dash>--to-</dash>
+				<space>-</space>
+				<slash>--per-</slash>
+				<plus>--plus-</plus>
+				<underscore>--uscore-</underscore>
+				<quote>--qt-</quote>
+				<double_quote>--dqt-</double_quote>
+                <hash>--no-</hash>
+                <percent>--percent-</percent>
+                <ampersand>--and-</ampersand>
+            </seo>
+		</ewall_filters>
+	</default>
+	<ewall_filterseolinks>
+        <noindex>
+            <empty translate="title" module="ewall_filterseolinks">
+                <title></title>
+                <model>ewall_filterseolinks/noindex_empty</model>
+            </empty>
+            <several_filters translate="title" module="ewall_filterseolinks">
+                <title>2 or more filters applied</title>
+                <model>ewall_filterseolinks/noindex_filters</model>
+            </several_filters>
+            <several_options translate="title" module="ewall_filterseolinks">
+                <title>2 or more options in the same filter applied</title>
+                <model>ewall_filterseolinks/noindex_options</model>
+            </several_options>
+            <slider translate="title" module="ewall_filterseolinks">
+                <title>Slider filter applied</title>
+                <model>ewall_filterseolinks/noindex_slider</model>
+            </slider>
+            <any translate="title" module="ewall_filterseolinks">
+                <title>Any filter applied</title>
+                <model>ewall_filterseolinks/noindex_any</model>
+            </any>
+        </noindex>
+	</ewall_filterseolinks>
+</config>

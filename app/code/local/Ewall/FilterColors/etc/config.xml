@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_FilterColors
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<!-- BASED ON SNIPPET: New Module/etc/config.xml -->
+<config>
+	<!-- This section registers module with Magento system. -->
+	<modules>
+		<Ewall_FilterColors>
+		  	<!-- This version number identifies version of database tables specific to this extension. It is written to
+		  	core_resource table.  -->
+		    <version>13.05.16.20</version>
+		</Ewall_FilterColors>
+	</modules>
+	<!-- This section contains module settings which are merged into global configuration during each page load, 
+	each ajax request. -->
+	<global>
+		<!-- This section registers helper classes to be accessible through Mage::helper() method. Ewall_FilterColors_Helper_Data
+		class is accessible through Mage::helper('ewall_filtercolors') call, other Ewall_FilterColors_Helper_XXX_YYY classes are accessible 
+		through  Mage::helper('ewall_filtercolors/xxx_yyy') call. -->
+		<helpers>
+			<ewall_filtercolors>
+				<!-- This says that string 'ewall_filtercolors' corresponds to Ewall_FilterColors_Helper pseudo-namespace in 
+				Mage::helper() calls. -->
+				<class>Ewall_FilterColors_Helper</class>
+			</ewall_filtercolors>
+		</helpers>
+		<!-- BASED ON SNIPPET: Blocks/Block support (config.xml) -->
+		<!-- This section registers block classes to be accessible from layout XML files (in type="<block type>") or 
+		through calls to $this->getLayout()->createBlock('<block type>') in block or controller code. That is, 
+		Ewall_FilterColors_Block_XXX_YYY classes are accessible as 'ewall_filtercolors/xxx_yyy' type strings both in layout files
+		and in createBlock() calls. -->
+		<blocks>
+			<!-- This says that string 'ewall_filtercolors' corresponds to Ewall_FilterColors_Block pseudo-namespace in 
+			layout xml files and in createBlock() calls. -->
+			<ewall_filtercolors>
+				<class>Ewall_FilterColors_Block</class>
+			</ewall_filtercolors>
+		</blocks>
+		
+		<!-- BASED ON SNIPPET: Models/Model support (config.xml) -->
+		<!-- This section registers model classes to be accessible through Mage::getModel('<model type>') and through
+		Mage::getSingleton('<model type>') calls. That is, Ewall_FilterColors_Model_XXX_YYY classes are accessible as 
+		'ewall_filtercolors/xxx_yyy' type strings both in getModel() and getSingleton() calls. -->
+		<models>
+			<!-- This says that string 'ewall_filtercolors' corresponds to Ewall_FilterColors_Model pseudo-namespace in 
+			getModel() and getSingleton() calls. -->
+			<ewall_filtercolors>
+				<class>Ewall_FilterColors_Model</class>
+				<!-- BASED ON SNIPPET: Resources/Declare resource section (config.xml) -->
+				<!-- This tells Magento to read config/global/models/ewall_filtercolors_resources sections and register
+				resource model information from there -->
+				<resourceModel>ewall_filtercolors_resources</resourceModel>
+				<!-- INSERT HERE: resource section name -->
+			</ewall_filtercolors>
+			<!-- BASED ON SNIPPET: Resources/Resource support (config.xml) -->
+			<!-- This says that string 'ewall_filtercolors' corresponds to Ewall_FilterColors_Resource pseudo-namespace in 
+			getResourceModel() calls. -->
+			<ewall_filtercolors_resources>
+				<class>Ewall_FilterColors_Resource</class>
+				<entities>
+					<!-- INSERT HERE: table-entity mappings -->
+				</entities>
+			</ewall_filtercolors_resources>
+			<!-- INSERT HERE: rewrites, ... -->
+		</models>
+		<!-- BASED ON SNIPPET: Resources/Installation script support (config.xml) -->
+		<!-- This tells Magento to analyze sql/ewall_filtercolors_setup directory for install/upgrade scripts. 
+		Installation scripts should be named as 'mysql4-install-<new version>.php'. 
+		Upgrade scripts should be named as mysql4-upgrade-<current version>-<new version>.php -->
+		<resources>
+			<ewall_filtercolors_setup>
+				<setup>
+					<module>Ewall_FilterColors</module>
+				</setup>
+			</ewall_filtercolors_setup>
+		</resources>
+		<!-- BASED ON SNIPPET: New Models/Event support (config.xml) -->
+		<!-- This section registers event handlers of this module defined in Ewall_FilterColors_Model_Observer with events defined in other
+		module throughout the system. So when some code in other module invokes an event mentioned in this section, handler
+		method of Ewall_FilterColors_Model_Observer class gets called. -->
+		<events>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_is_config_changed><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>isConfigChanged</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_is_config_changed>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_update_columns><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>prepareUpdateColumns</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_update_columns>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_update_process><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>processUpdate</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_update_process>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_insert_columns><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>prepareInsertColumns</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_insert_columns>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_insert_process><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>processInsert</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_insert_process>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_add_edited_data><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>addEditedData</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_add_edited_data>
+			<!-- BASED ON SNIPPET: Models/Event handler (config.xml) -->
+			<ewall_database_validate><!-- this is event name this module listens for -->
+				<observers>
+					<ewall_filtercolors>
+						<class>ewall_filtercolors/observer</class> <!-- model name of class containing event handler methods -->
+						<method>validate</method> <!-- event handler method name -->
+					</ewall_filtercolors>
+				</observers>
+			</ewall_database_validate>
+            <ewall_database_add_edited_details><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filtercolors>
+                        <class>ewall_filtercolors/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>addGridData</method>
+                        <!-- event handler method name -->
+                    </ewall_filtercolors>
+                </observers>
+            </ewall_database_add_edited_details>
+            <model_save_commit_after><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filtercolors>
+                        <class>ewall_filtercolors/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>updateFiles</method>
+                        <!-- event handler method name -->
+                    </ewall_filtercolors>
+                </observers>
+            </model_save_commit_after>
+            <ewall_filter_value_html><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filtercolors>
+                        <class>ewall_filtercolors/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>renderValue</method>
+                        <!-- event handler method name -->
+                    </ewall_filtercolors>
+                </observers>
+            </ewall_filter_value_html>
+            <m_saved><!-- this is event name this module listens for -->
+                <observers>
+                    <ewall_filtercolors>
+                        <class>ewall_filtercolors/observer</class>
+                        <!-- model name of class containing event handler methods -->
+                        <method>generateCss</method>
+                        <!-- event handler method name -->
+                    </ewall_filtercolors>
+                </observers>
+            </m_saved>
+		</events>
+		<!-- INSERT HERE: blocks, models, ... -->
+	</global>
+	<!-- BASED ON SNIPPET: Static Visuals/Adminhtml section (config.xml) -->
+	<!-- This section enables static visual changes in admin area. -->
+	<adminhtml>
+		<!-- BASED ON SNIPPET: Translation support/Adminhtml (config.xml) -->
+		<!-- This section registers additional translation file with our module-specific strings to be loaded 
+		during admin area request processing -->
+		<translate>
+			<modules>
+				<Ewall_FilterColors>
+					<files>
+						<default>Ewall_FilterColors.csv</default>
+					</files>
+				</Ewall_FilterColors>
+			</modules>
+		</translate>
+		<!-- BASED ON SNIPPET: Static Visuals/Layout file support (config.xml) -->
+		<!-- This section registers additional layout XML file with our module-specific layout changes to be loaded
+		and executes during page rendering. -->
+		<layout>
+			<updates>
+				<ewall_filtercolors>
+					<file>ewall_filtercolors.xml</file>
+				</ewall_filtercolors>
+			</updates>
+		</layout>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</adminhtml>
+	<!-- BASED ON SNIPPET: Controllers/Subscribe to adminhtml router (config.xml) -->
+	<!-- All the following subscribes to listening to /admin/* urls and tries to map is to appropriate action 
+	method in this modules controllers folder. That is for /admin/a/b it will search for controllers/A.php, in it
+	it will expect Ewall_FilterColors_AController class, and in class it will expect bAction() method. In most cases, 
+	when it does not find suitable method, dispatcher continues with searching in Mage_Adminhtml module. -->
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                    	<ewall_filtercolors before="Mage_Adminhtml">Ewall_FilterColors</ewall_filtercolors>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <!-- BASED ON SNIPPET: Static Visuals/Frontend section (config.xml) -->
+	<!-- This section enables static visual changes in store frontend. -->
+	<frontend>
+		<!-- BASED ON SNIPPET: Static Visuals/Layout file support (config.xml) -->
+		<!-- This section registers additional layout XML file with our module-specific layout changes to be loaded
+		and executes during page rendering. -->
+		<layout>
+			<updates>
+				<ewall_filtercolors>
+					<file>ewall_filtercolors.xml</file>
+				</ewall_filtercolors>
+			</updates>
+		</layout>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</frontend>
+	<default>
+		<ewall_filters>
+			<colors>
+				<image_width>60</image_width>
+				<image_height>30</image_height>
+				<image_border_radius>2</image_border_radius>
+                <state_width>20</state_width>
+                <state_height>10</state_height>
+                <state_border_radius>1</state_border_radius>
+			</colors>
+		</ewall_filters>
+	</default>
+	<!-- INSERT HERE: adminhtml, frontend, ... -->
+	<!-- This section extends Ewall_Filters module functionality --> 
+	<ewall_filters>
+		<display><!-- display options for individual filters -->
+			<attribute> <!-- available display options for attribute-based filters -->
+				<colors translate="title" module="ewall_filtercolors">
+					<title>Colors and Images (Horizontal)</title><!-- this one is displayed in admin -->
+					<block>ewall_filtercolors/filter</block>
+					<model>ewall_filters/filter_attribute</model>
+                    <solr_model>ewall_filters/solr_attribute</solr_model>
+                    <solr_and_model>ewall_filters/solr_and_attribute</solr_and_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_attribute</solr_reverse_model>
+                    <resource>ewall_filters/filter_attribute</resource>
+					<and_resource>ewall_filters/filter_and_attribute</and_resource>
+					<reverse_resource>ewall_filters/filter_reverse_attribute</reverse_resource>
+					<template>ewall/filtercolors/horizontal.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>300</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</colors>
+                <colors_vertical translate="title" module="ewall_filtercolors">
+                    <title>Colors and Images (Vertical)</title><!-- this one is displayed in admin -->
+                    <block>ewall_filtercolors/filter</block>
+					<model>ewall_filters/filter_attribute</model>
+                    <solr_model>ewall_filters/solr_attribute</solr_model>
+                    <solr_and_model>ewall_filters/solr_and_attribute</solr_and_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_attribute</solr_reverse_model>
+                    <resource>ewall_filters/filter_attribute</resource>
+					<and_resource>ewall_filters/filter_and_attribute</and_resource>
+					<reverse_resource>ewall_filters/filter_reverse_attribute</reverse_resource>
+                    <template>ewall/filtercolors/vertical.phtml</template><!-- PHTML to be rendered -->
+                    <sort_order>300</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+                </colors_vertical>
+                <colors_label translate="title" module="ewall_filtercolors">
+                    <title>Colors and Images (with Labels)</title>
+                    <!-- this one is displayed in admin -->
+                    <block>ewall_filtercolors/filter</block>
+					<model>ewall_filters/filter_attribute</model>
+                    <solr_model>ewall_filters/solr_attribute</solr_model>
+                    <solr_and_model>ewall_filters/solr_and_attribute</solr_and_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_attribute</solr_reverse_model>
+                    <resource>ewall_filters/filter_attribute</resource>
+					<and_resource>ewall_filters/filter_and_attribute</and_resource>
+					<reverse_resource>ewall_filters/filter_reverse_attribute</reverse_resource>
+                    <template>ewall/filtercolors/label.phtml</template> <!-- PHTML to be rendered -->
+                    <sort_order>300</sort_order> <!-- Position in "Display as" list. The item with least position is the default one. -->
+                </colors_label>
+            </attribute>
+		</display>
+	</ewall_filters>
+</config>

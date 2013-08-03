@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_Ajax
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<ewall translate="title" module="ewall_ajax">
+										<title>Ewall Team General Settings</title>
+									</ewall>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

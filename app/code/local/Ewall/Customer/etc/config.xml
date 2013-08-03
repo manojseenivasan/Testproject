@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+    <config>
+        <modules>
+            <Ewall_Customer>
+                <version>0.1.0</version>
+            </Ewall_Customer>
+        </modules>
+ 
+        <frontend>
+           <routers>
+              <ewall_customer>
+                 <use>standard</use>
+                 <args>
+                     <module>Ewall_Customer</module>
+                     <frontName>customer</frontName>
+                 </args>
+              </ewall_customer>
+           </routers>
+        </frontend>
+         <global>
+          <rewrite>
+            <ewall_customer_account>
+              <from><![CDATA[#^/account/createPostAjax#]]></from>
+              <to>/customer/account/createPostAjax</to>
+            </ewall_customer_account>
+           </rewrite>
+        </global>
+</config>

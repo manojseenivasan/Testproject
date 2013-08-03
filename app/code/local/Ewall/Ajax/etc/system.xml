@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_Ajax
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<config>
+    <tabs>
+        <ewall>
+            <label>Ewall Team</label>
+            <sort_order>250</sort_order>
+        </ewall>
+    </tabs>
+    <sections>
+        <ewall>
+            <label>General</label>
+            <tab>ewall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>50</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            
+        </ewall>
+    </sections>
+</config>

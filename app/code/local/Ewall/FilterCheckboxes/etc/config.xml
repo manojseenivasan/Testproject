@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_FilterCheckboxes
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<!-- BASED ON SNIPPET: New Module/etc/config.xml -->
+<config>
+	<!-- This section registers module with Magento system. -->
+	<modules>
+		<Ewall_FilterCheckboxes>
+		  	<!-- This version number identifies version of database tables specific to this extension. It is written to
+		  	core_resource table.  -->
+		    <version>13.02.13.14</version>
+		</Ewall_FilterCheckboxes>
+	</modules>
+	<!-- This section contains module settings which are merged into global configuration during each page load, 
+	each ajax request. -->
+	<global>
+		<!-- This section registers helper classes to be accessible through Mage::helper() method. Ewall_FilterCheckboxes_Helper_Data
+		class is accessible through Mage::helper('ewall_filtercheckboxes') call, other Ewall_FilterCheckboxes_Helper_XXX_YYY classes are accessible 
+		through  Mage::helper('ewall_filtercheckboxes/xxx_yyy') call. -->
+		<helpers>
+			<ewall_filtercheckboxes>
+				<!-- This says that string 'ewall_filtercheckboxes' corresponds to Ewall_FilterCheckboxes_Helper pseudo-namespace in 
+				Mage::helper() calls. -->
+				<class>Ewall_FilterCheckboxes_Helper</class>
+			</ewall_filtercheckboxes>
+		</helpers>
+		<!-- INSERT HERE: blocks, models, ... -->
+	</global>
+	<!-- BASED ON SNIPPET: Static Visuals/Adminhtml section (config.xml) -->
+	<!-- This section enables static visual changes in admin area. -->
+	<adminhtml>
+		<!-- BASED ON SNIPPET: Translation support/Adminhtml (config.xml) -->
+		<!-- This section registers additional translation file with our module-specific strings to be loaded 
+		during admin area request processing -->
+		<translate>
+			<modules>
+				<Ewall_FilterCheckboxes>
+					<files>
+						<default>Ewall_FilterCheckboxes.csv</default>
+					</files>
+				</Ewall_FilterCheckboxes>
+			</modules>
+		</translate>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</adminhtml>
+	<!-- BASED ON SNIPPET: Static Visuals/Frontend section (config.xml) -->
+	<!-- This section enables static visual changes in store frontend. -->
+	<frontend>
+		<!-- BASED ON SNIPPET: Static Visuals/Layout file support (config.xml) -->
+		<!-- This section registers additional layout XML file with our module-specific layout changes to be loaded
+		and executes during page rendering. -->
+		<layout>
+			<updates>
+				<ewall_filtercheckboxes>
+					<file>ewall_filtercheckboxes.xml</file>
+				</ewall_filtercheckboxes>
+			</updates>
+		</layout>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</frontend>
+	<!-- INSERT HERE: adminhtml, frontend, ... -->
+	
+	<!-- This section extends Ewall_Filters module functionality --> 
+	<ewall_filters>
+		<display><!-- display options for individual filters -->
+			<attribute> <!-- available display options for attribute-based filters -->
+				<checkboxes translate="title" module="ewall_filtercheckboxes">
+					<title>Checkboxes (Form Elements)</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_attribute</model>
+                    <solr_model>ewall_filters/solr_attribute</solr_model>
+                    <solr_and_model>ewall_filters/solr_and_attribute</solr_and_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_attribute</solr_reverse_model>
+                    <resource>ewall_filters/filter_attribute</resource>
+					<and_resource>ewall_filters/filter_and_attribute</and_resource>
+					<reverse_resource>ewall_filters/filter_reverse_attribute</reverse_resource>
+					<template>ewall/filtercheckboxes/items.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>200</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</checkboxes>
+				<css_checkboxes translate="title" module="ewall_filtercheckboxes">
+					<title>Checkboxes (Images)</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_attribute</model>
+                    <solr_model>ewall_filters/solr_attribute</solr_model>
+                    <solr_and_model>ewall_filters/solr_and_attribute</solr_and_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_attribute</solr_reverse_model>
+                    <resource>ewall_filters/filter_attribute</resource>
+					<and_resource>ewall_filters/filter_and_attribute</and_resource>
+					<reverse_resource>ewall_filters/filter_reverse_attribute</reverse_resource>
+					<template>ewall/filtercheckboxes/cssitems.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>230</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</css_checkboxes>
+			</attribute>
+			<price> <!-- available display options for price filter -->
+				<checkboxes translate="title" module="ewall_filtercheckboxes">
+					<title>Checkboxes (Form Elements)</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_price</model>
+					<solr_model>ewall_filters/solr_price</solr_model>
+					<solr_reverse_model>ewall_filters/solr_reverse_price</solr_reverse_model>
+					<resource>ewall_filters/filter_price</resource>
+					<reverse_resource>ewall_filters/filter_reverse_price</reverse_resource>
+					<template>ewall/filtercheckboxes/items.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>200</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</checkboxes>
+				<css_checkboxes translate="title" module="ewall_filtercheckboxes">
+					<title>Checkboxes (Images)</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_price</model>
+					<solr_model>ewall_filters/solr_price</solr_model>
+					<solr_reverse_model>ewall_filters/solr_reverse_price</solr_reverse_model>
+					<resource>ewall_filters/filter_price</resource>
+					<reverse_resource>ewall_filters/filter_reverse_price</reverse_resource>
+					<template>ewall/filtercheckboxes/cssitems.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>230</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</css_checkboxes>
+			</price>
+			<decimal> <!-- available display options for price type filter -->
+				<checkboxes translate="title" module="ewall_filtercheckboxes">
+					<title>Checkboxes (Form Elements)</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+                    <model>ewall_filters/filter_decimal</model>
+                    <solr_model>ewall_filters/solr_decimal</solr_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_decimal</solr_reverse_model>
+                    <resource>ewall_filters/filter_decimal</resource>
+                    <reverse_resource>ewall_filters/filter_reverse_decimal</reverse_resource>
+                    <template>ewall/filtercheckboxes/items.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>200</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</checkboxes>
+				<css_checkboxes translate="title" module="ewall_filtercheckboxes">
+					<title>Checkboxes (Images)</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_decimal</model>
+                    <solr_model>ewall_filters/solr_decimal</solr_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_decimal</solr_reverse_model>
+                    <resource>ewall_filters/filter_decimal</resource>
+                    <reverse_resource>ewall_filters/filter_reverse_decimal</reverse_resource>
+                    <template>ewall/filtercheckboxes/cssitems.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>230</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</css_checkboxes>
+			</decimal>
+		</display>
+	
+	</ewall_filters>
+    <default>
+        <ewall_filters>
+            <display>
+                <attribute>css_checkboxes</attribute>
+            </display>
+        </ewall_filters>
+    </default>
+</config>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_FilterSlider
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<!-- BASED ON SNIPPET: New Module/etc/config.xml -->
+<config>
+	<!-- This section registers module with Magento system. -->
+	<modules>
+		<Ewall_FilterSlider>
+		  	<!-- This version number identifies version of database tables specific to this extension. It is written to
+		  	core_resource table.  -->
+		    <version>13.05.11.20</version>
+		</Ewall_FilterSlider>
+	</modules>
+	<!-- This section contains module settings which are merged into global configuration during each page load, 
+	each ajax request. -->
+	<global>
+		<!-- This section registers helper classes to be accessible through Mage::helper() method. Ewall_FilterSlider_Helper_Data
+		class is accessible through Mage::helper('ewall_filterslider') call, other Ewall_FilterSlider_Helper_XXX_YYY classes are accessible 
+		through  Mage::helper('ewall_filterslider/xxx_yyy') call. -->
+		<helpers>
+			<ewall_filterslider>
+				<!-- This says that string 'ewall_filterslider' corresponds to Ewall_FilterSlider_Helper pseudo-namespace in 
+				Mage::helper() calls. -->
+				<class>Ewall_FilterSlider_Helper</class>
+			</ewall_filterslider>
+		</helpers>
+		<!-- BASED ON SNIPPET: Models/Model support (config.xml) -->
+		<!-- This section registers model classes to be accessible through Mage::getModel('<model type>') and through
+		Mage::getSingleton('<model type>') calls. That is, Ewall_FilterSlider_Model_XXX_YYY classes are accessible as 
+		'ewall_filterslider/xxx_yyy' type strings both in getModel() and getSingleton() calls. -->
+		<models>
+			<!-- This says that string 'ewall_filterslider' corresponds to Ewall_FilterSlider_Model pseudo-namespace in 
+			getModel() and getSingleton() calls. -->
+			<ewall_filterslider>
+				<class>Ewall_FilterSlider_Model</class>
+				<!-- BASED ON SNIPPET: Resources/Declare resource section (config.xml) -->
+				<!-- This tells Magento to read config/global/models/ewall_filterslider_resources sections and register
+				resource model information from there -->
+				<resourceModel>ewall_filterslider_resources</resourceModel>
+				<!-- INSERT HERE: resource section name -->
+			</ewall_filterslider>
+			<!-- BASED ON SNIPPET: Resources/Resource support (config.xml) -->
+			<!-- This says that string 'ewall_filterslider' corresponds to Ewall_FilterSlider_Resource pseudo-namespace in 
+			getResourceModel() calls. -->
+			<ewall_filterslider_resources>
+				<class>Ewall_FilterSlider_Resource</class>
+				<entities>
+					<!-- INSERT HERE: table-entity mappings -->
+				</entities>
+			</ewall_filterslider_resources>
+			<!-- INSERT HERE: rewrites, ... -->
+		</models>
+		<!-- INSERT HERE: blocks, models, ... -->
+	</global>
+	<!-- BASED ON SNIPPET: Static Visuals/Adminhtml section (config.xml) -->
+	<!-- This section enables static visual changes in admin area. -->
+	<adminhtml>
+		<!-- BASED ON SNIPPET: Translation support/Adminhtml (config.xml) -->
+		<!-- This section registers additional translation file with our module-specific strings to be loaded 
+		during admin area request processing -->
+		<translate>
+			<modules>
+				<Ewall_FilterSlider>
+					<files>
+						<default>Ewall_FilterSlider.csv</default>
+					</files>
+				</Ewall_FilterSlider>
+			</modules>
+		</translate>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</adminhtml>
+	<!-- BASED ON SNIPPET: Static Visuals/Frontend section (config.xml) -->
+	<!-- This section enables static visual changes in store frontend. -->
+	<frontend>
+		<!-- BASED ON SNIPPET: Static Visuals/Layout file support (config.xml) -->
+		<!-- This section registers additional layout XML file with our module-specific layout changes to be loaded
+		and executes during page rendering. -->
+		<layout>
+			<updates>
+				<ewall_filterslider>
+					<file>ewall_filterslider.xml</file>
+				</ewall_filterslider>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Ewall_FilterSlider>
+					<files>
+						<default>Ewall_FilterSlider.csv</default>
+					</files>
+				</Ewall_FilterSlider>
+			</modules>
+		</translate>
+		<!-- INSERT HERE: layout, translate, routers -->
+	</frontend>
+	<!-- INSERT HERE: adminhtml, frontend, ... -->
+
+	<!-- This section extends Ewall_Filters module functionality --> 
+	<ewall_filters>
+		<display><!-- display options for individual filters -->
+			<price> <!-- available display options for price filter -->
+				<slider translate="title" module="ewall_filterslider">
+					<title>Slider</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_price</model>
+					<resource>ewall_filterslider/price</resource>
+					<template>ewall/filterslider/items.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>300</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</slider>
+			</price>
+			<decimal> <!-- available display options for price filter -->
+				<slider translate="title" module="ewall_filterslider">
+					<title>Slider</title><!-- this one is displayed in admin -->
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_decimal</model>
+					<resource>ewall_filterslider/decimal</resource>
+					<template>ewall/filterslider/items.phtml</template><!-- PHTML to be rendered -->
+					<sort_order>300</sort_order><!-- Position in "Display as" list. The item with least position is the default one. -->
+				</slider>
+			</decimal>
+		</display>
+	
+	</ewall_filters>
+    <default>
+        <ewall_filters>
+            <display>
+                <price>slider</price>
+                <decimal>slider</decimal>
+            </display>
+        </ewall_filters>
+    </default>
+</config>

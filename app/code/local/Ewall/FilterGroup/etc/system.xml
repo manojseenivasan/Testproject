@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Ewall
+@package     Ewall_FilterGroup
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<config>
+    <tabs>
+        <ewall>
+            <label>Ewall Team</label>
+            <sort_order>250</sort_order>
+        </ewall>
+    </tabs>
+    <sections>
+        <ewall_filters>
+            <groups>
+                <advanced>
+                    <fields>
+                        <group_by translate="label" module="ewall_filtergroup">
+                            <label>Group Filters By</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ewall_filtergroup/source_method</source_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </group_by>
+                        <collapseable_groups translate="label" module="ewall_filtergroup">
+                            <label>Expand/Collapse Groups</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ewall_filteradvanced/source_expandcollapse</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </collapseable_groups>
+                    </fields>
+                </advanced>
+            </groups>
+        </ewall_filters>
+    </sections>
+</config>

@@ -1,0 +1,325 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Your order has been received.') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>
+    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<?php endif;?>
+    <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+    <p>
+        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+<?php endif;?>
+
+<?php if ($this->getAgreementRefId()): ?>
+    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+
+<div class="news-loader" id="news-loader" style="text-align:center; display:none;">
+        <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif'); ?>" />
+</div>   
+<div id="feedback" style="display:none" class="mini-newsletter">
+Thank you for subscribing to our newsletter!
+</div>
+<div class="error-news-msg" id="error-news-msg" style="display:none;">Please insert a valid email address.</div>
+<form name="newsletter-form" id="newsletter-form" method="post">
+    <div class="block-content">
+     <div class="input-box input_bg" style="float: left;">
+      <input type="text" name="email" id="newsletter" title="<?php echo $this->__('Subscribe to Our Newsletter') ?>" class="input-text required-entry validate-email input-subscribe" style="" />
+    </div>
+    <button type="button" title="<?php echo $this->__('Subscribe') ?>" onclick="newsletter_validation_bak();" class="submit-butn">Go</button>
+    </div>
+</form> 
+<script type="text/javascript">
+function newsletter_validation_bak()
+ {   
+  var newsletterSubscriberFormDetail = new VarienForm('newsletter-form');
+  var form_email = $('newsletter').getValue();
+  var params_form = $('newsletter-validate-detail');
+  //alert(params_form);
+  new Validation('newsletter');
+  if(echeck(form_email))
+  {
+  //alert(form_email);
+  //alert(Form.serialize($('newsletter-validate-detail')));
+  new Ajax.Updater({ success: 'newsletter-form' }, '<?php echo $this->getUrl('newsletter/subscriber/new') ?>', {
+   asynchronous:true, evalScripts:false,
+   parameters: { email: form_email },
+   onComplete:function(request, json){Element.hide('newsletter-form'); Element.hide('news-loader'); Element.show('feedback');},
+   onLoading:function(request, json){Element.show('news-loader');},
+    
+  });
+ 
+     
+     
+  }
+  else
+  {
+  //alert(form_email);
+   return false;
+  }
+ 
+ }   
+  
+  
+  
+function echeck(str) {
+ 
+ var at="@"
+ var dot="."
+ var lat=str.indexOf(at)
+ var lstr=str.length
+ var ldot=str.indexOf(dot)
+ if (str.indexOf(at)==-1){
+    //alert("Invalid E-mail ID")
+    goProcedural()
+    return false
+ }
+ 
+ if (str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr){
+    //alert("Invalid E-mail ID")
+    goProcedural()
+    return false
+ }
+ 
+ if (str.indexOf(dot)==-1 || str.indexOf(dot)==0 || str.indexOf(dot)==lstr){
+  //alert("Invalid E-mail ID")
+  goProcedural()
+  return false
+ }
+ 
+  if (str.indexOf(at,(lat+1))!=-1){
+  //alert("Invalid E-mail ID")
+  goProcedural()
+  return false
+  }
+ 
+  if (str.substring(lat-1,lat)==dot || str.substring(lat+1,lat+2)==dot){
+  //alert("Invalid E-mail ID")
+  goProcedural()
+  return false
+  }
+ 
+  if (str.indexOf(dot,(lat+2))==-1){
+  //alert("Invalid E-mail ID")
+  goProcedural()
+  return false
+  }
+  
+  if (str.indexOf(" ")!=-1){
+  //alert("Invalid E-mail ID")
+  goProcedural()
+  return false
+  }
+ 
+   return true                   
+}
+ 
+function goProcedural()
+{
+Element.show('error-news-msg');
+Element.hide.delay(5, 'error-news-msg');
+}
+</script>
+
+<!--
+account create
+-->
+<script type="text/javascript">
+			function registerRequest() {
+				var params = $('form-validate').serialize();
+				var ajaxObjhttp = new Ajax.Request('<?php echo $this->getBaseUrl()?>/customer/account/createPostAjax', {
+					method: 'POST',
+					parameters: params,
+					onComplete: function(Res){
+					var json = Res.responseText.evalJSON();
+					if(json.error){
+						$('error_box_main').update('<div class="messages error-msg">'+json.error+'</div>');
+						
+					}else{
+						$('account-create').update('<div class="messages success-msg">'+json.success+'</div>');
+						//setLocation(json.url);
+						
+					}
+				}
+			               
+			                /*onSuccess: function(transport) {
+			                      var serverResponse = transport.responseText;
+			                      $('error_box').update(serverResponse);
+			                }, 
+			                onFailure : function(response) {
+			                      alert("Some error occured while making call to remote server");
+			                }*/
+			        });};
+</script>
+<div id="account-create" class="account-create">
+    <div class="page-title">
+        <h1>Create an Account</h1>
+    </div>
+    <div id="error_box_main"></div>
+	<div id="success_box_main"></div>
+            <form action="<?php //echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+        <div class="fieldset">
+            <input type="hidden" value="" name="success_url">
+            <input type="hidden" value="" name="error_url">
+            <h2 class="legend">Personal Information</h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="customer-name">
+    <div class="field name-firstname">
+        <label class="required" for="firstname"><em>*</em>First Name</label>
+        <div class="input-box">
+            <input type="text" class="input-text required-entry" maxlength="255" title="First Name" value="" name="firstname" id="firstname">
+        </div>
+    </div>
+    <div class="field name-lastname">
+        <label class="required" for="lastname"><em>*</em>Last Name</label>
+        <div class="input-box">
+            <input type="text" class="input-text required-entry" maxlength="255" title="Last Name" value="" name="lastname" id="lastname">
+        </div>
+    </div>
+</div>
+                </li>
+                <li>
+                    <label class="required" for="email_address"><em>*</em>Email Address</label>
+                    <div class="input-box">
+                        <input type="text" class="input-text validate-email required-entry" title="Email Address" value="" id="email_address" name="email">
+                    </div>
+                </li>
+                                <li class="control">
+                    <div class="input-box">
+                        <input type="checkbox" class="checkbox" id="is_subscribed" value="1" title="Sign Up for Newsletter" name="is_subscribed">
+                    </div>
+                    <label for="is_subscribed">Sign Up for Newsletter</label>
+                </li>
+                                                                                                    </ul>
+        </div>
+            <div class="fieldset">
+            <h2 class="legend">Login Information</h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label class="required" for="password"><em>*</em>Password</label>
+                        <div class="input-box">
+                            <input type="password" class="input-text required-entry validate-password" title="Password" id="password" name="password">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="required" for="confirmation"><em>*</em>Confirm Password</label>
+                        <div class="input-box">
+                            <input type="password" class="input-text required-entry validate-cpassword" id="confirmation" title="Confirm Password" name="confirmation">
+                        </div>
+                    </div>
+                </li>
+                                            </ul>
+            
+
+<script type="text/javascript">
+//&lt;![CDATA[
+    function toggleRememberMepopup(event){
+        if($('remember-me-popup')){
+            var viewportHeight = document.viewport.getHeight(),
+                docHeight      = $$('body')[0].getHeight(),
+                height         = docHeight &gt; viewportHeight ? docHeight : viewportHeight;
+            $('remember-me-popup').toggle();
+            $('window-overlay').setStyle({ height: height + 'px' }).toggle();
+        }
+        Event.stop(event);
+    }
+
+    document.observe("dom:loaded", function() {
+        new Insertion.Bottom($$('body')[0], $('window-overlay'));
+        new Insertion.Bottom($$('body')[0], $('remember-me-popup'));
+
+        $$('.remember-me-popup-close').each(function(element){
+            Event.observe(element, 'click', toggleRememberMepopup);
+        })
+        $$('#remember-me-box a').each(function(element) {
+            Event.observe(element, 'click', toggleRememberMepopup);
+        });
+    });
+//]]&gt;
+</script>
+        </div>
+        <div class="buttons-set">
+            <p class="required">* Required Fields</p>
+           <!-- <p class="back-link"><a class="back-link" href="http://dev.store.123greetings.com/index.php/customer/account/login/"><small>« </small>Back</a></p>-->
+            <button type="button" onclick="if(dataForm.validator && dataForm.validator.validate()){ registerRequest();}" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+        </div>
+        </form></div>
+        <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        <?php if($this->getShowAddressFields()): ?>
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        <?php endif; ?>
+    //]]>
+    </script>
+    
+   <style>
+   .messages {
+  font-size: 0.95em !important;
+  font-weight: bold !important;
+  margin-bottom: 11px !important;
+  min-height: 23px !important;
+  padding: 8px 8px 2px 32px !important;
+}
+.success-msg {
+  background: url("images/success_msg_icon.gif") no-repeat scroll 10px 10px #EFF5EA !important;
+  border: 1px solid #95A486 !important;
+  color: #3D6611 !important;
+}
+.error-msg {
+  background: url("images/error_msg_icon.gif") no-repeat scroll 10px 10px #FAEBE7 !important;
+  border: 1px solid #F16048 !important;
+  color: #DF280A !important;
+}
+   </style>

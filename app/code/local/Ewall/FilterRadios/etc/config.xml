@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>	
+<!-- 
+@category    Ewall
+@package     Ewall_FilterRadios
+@copyright   Copyright (c) http://www.ewalldev.com
+@license     http://www.ewalldev.com/license  Proprietary License
+ -->
+<!-- BASED ON SNIPPET: New Module/etc/config.xml -->
+<config>
+	<modules>
+		<Ewall_FilterRadios>
+		    <version>13.02.13.14</version>
+		</Ewall_FilterRadios>
+	</modules>
+	<global>
+		<helpers>
+			<ewall_filterradios>
+				<class>Ewall_FilterRadios_Helper</class>
+			</ewall_filterradios>
+		</helpers>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Ewall_FilterRadios>
+					<files>
+						<default>Ewall_FilterRadios.csv</default>
+					</files>
+				</Ewall_FilterRadios>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<layout>
+			<updates>
+				<ewall_filterradios>
+					<file>ewall_filterradios.xml</file>
+				</ewall_filterradios>
+			</updates>
+		</layout>
+	</frontend>
+	<ewall_filters>
+		<display>
+			<attribute> 
+				<radios translate="title" module="ewall_filterradios">
+					<title>Radio Buttons</title>
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_attribute</model>
+                    <solr_model>ewall_filters/solr_attribute</solr_model>
+                    <solr_and_model>ewall_filters/solr_and_attribute</solr_and_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_attribute</solr_reverse_model>
+                    <resource>ewall_filters/filter_attribute</resource>
+					<and_resource>ewall_filters/filter_and_attribute</and_resource>
+					<reverse_resource>ewall_filters/filter_reverse_attribute</reverse_resource>
+					<template>ewall/filterradios/items.phtml</template>
+					<sort_order>400</sort_order>
+				</radios>
+			</attribute>
+			<price> 
+				<radios translate="title" module="ewall_filterradios">
+					<title>Radio Buttons</title>
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_price</model>
+					<solr_model>ewall_filters/solr_price</solr_model>
+					<solr_reverse_model>ewall_filters/solr_reverse_price</solr_reverse_model>
+					<resource>ewall_filters/filter_price</resource>
+					<reverse_resource>ewall_filters/filter_reverse_price</reverse_resource>
+					<template>ewall/filterradios/items.phtml</template>
+					<sort_order>400</sort_order>
+				</radios>
+			</price>
+			<category> 
+				<radios translate="title" module="ewall_filterradios">
+					<title>Radio Buttons</title>
+					<block>ewall_filters/filter</block>
+					<model>ewall_filters/filter_category</model>
+					<solr_model>ewall_filters/solr_category</solr_model>
+					<template>ewall/filterradios/items.phtml</template>
+					<sort_order>400</sort_order>
+				</radios>
+			</category>
+			<decimal>
+				<radios translate="title" module="ewall_filterradios">
+					<title>Radio Buttons</title>
+					<block>ewall_filters/filter</block>
+                    <model>ewall_filters/filter_decimal</model>
+                    <solr_model>ewall_filters/solr_decimal</solr_model>
+                    <solr_reverse_model>ewall_filters/solr_reverse_decimal</solr_reverse_model>
+                    <resource>ewall_filters/filter_decimal</resource>
+                    <reverse_resource>ewall_filters/filter_reverse_decimal</reverse_resource>
+					<template>ewall/filterradios/items.phtml</template>
+					<sort_order>400</sort_order>
+				</radios>
+			</decimal>
+		</display>
+	</ewall_filters>
+</config>
